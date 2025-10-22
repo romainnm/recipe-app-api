@@ -30,8 +30,8 @@ class UserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
-    #admin@example.com
-    #superuser123
+    # admin@example.com
+    # superuser123
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -43,14 +43,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email' # Replace the default username field
+    USERNAME_FIELD = 'email'  # Replace the default username field
 
 
 class Recipe(models.Model):
     """Recipe object."""
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete = models.CASCADE,
+        on_delete=models.CASCADE,
     )
     title = models.CharField(max_length=255)
     time_in_minutes = models.IntegerField()
@@ -60,3 +60,4 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
+    
