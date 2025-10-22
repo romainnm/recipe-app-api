@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.test import Client
 
+
 class AdminSiteTests(TestCase):
     """Tests for Django Admin"""
 
@@ -26,7 +27,6 @@ class AdminSiteTests(TestCase):
             name='Test User'
         )
 
-
     def test_users_list(self):
         """Test that users are listed on page."""
         url = reverse('admin:core_user_changelist')
@@ -34,7 +34,6 @@ class AdminSiteTests(TestCase):
 
         self.assertContains(res, self.user.name)
         self.assertContains(res, self.user.email)
-
 
     def test_edit_user_page(self):
         """Test the edit user page works."""
@@ -44,4 +43,3 @@ class AdminSiteTests(TestCase):
         self.assertEqual(res.status_code, 200)
 
 
-    

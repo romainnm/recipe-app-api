@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 
 from core import models
 
+
 class ModelTests(TestCase):
     """Test models."""
 
@@ -23,7 +24,6 @@ class ModelTests(TestCase):
         self.assertEqual(user.email, email)
         self.assertTrue(user.check_password(password))
 
-
     def test_new_user_email_nomalized(self):
         email = 'TestUser@MAIL.COM'
 
@@ -34,12 +34,10 @@ class ModelTests(TestCase):
 
         self.assertEqual(sample.email, 'TestUser@mail.com')
 
-
     def test_new_user_without_email_raises_error(self):
         email = ''
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user(email, password='password')
-
 
     def test_create_super_user(self):
         email = 'superuser@mail.com'
@@ -52,7 +50,6 @@ class ModelTests(TestCase):
 
         self.assertTrue(superuser.is_staff)
         self.assertTrue(superuser.is_superuser)
-
 
     def test_create_recipe(self):
         """Test creating a recipe is successful."""

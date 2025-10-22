@@ -9,6 +9,7 @@ from django.contrib.auth.models import (
     PermissionsMixin
 )
 
+
 class UserManager(BaseUserManager):
     """Manager for users."""
 
@@ -22,7 +23,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
     def create_superuser(self, email, password):
         """Create and return a new superuser."""
         user = self.create_user(email, password)
@@ -32,6 +32,7 @@ class UserManager(BaseUserManager):
         return user
     #admin@example.com
     #superuser123
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     """User in the system."""
@@ -47,15 +48,15 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Recipe(models.Model):
     """Recipe object."""
-    user=models.ForeignKey(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+        on_delete = models.CASCADE,
     )
-    title=models.CharField(max_length=255)
-    time_in_minutes=models.IntegerField()
-    price=models.DecimalField(max_digits=5, decimal_places=2)
-    description=models.TextField(blank=True)
-    link=models.CharField(max_length=255, blank=True)
+    title = models.CharField(max_length=255)
+    time_in_minutes = models.IntegerField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    description = models.TextField(blank=True)
+    link = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.title
