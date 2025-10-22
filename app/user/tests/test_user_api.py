@@ -86,7 +86,6 @@ class PublicUserApiTests(TestCase):
         self.assertIn('token', res.data)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
-
     def test_create_token_bad_credentials(self):
         """Test returns error if credentials invalid."""
 
@@ -142,9 +141,9 @@ class PrivateUserApiTests(TestCase):
 
     def setUp(self):
         self.user = create_user(
-            email= 'test@example.com',
-            password= 'testpass123',
-            name= 'Test Name'
+            email='test@example.com',
+            password='testpass123',
+            name='Test Name'
         )
 
         self.client = APIClient()
@@ -177,4 +176,4 @@ class PrivateUserApiTests(TestCase):
         self.user.refresh_from_db()
         self.assertEqual(self.user.name, payload['name'])
         self.assertTrue(self.user.check_password(payload['password']))
-        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)\
