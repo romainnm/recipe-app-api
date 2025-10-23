@@ -20,14 +20,14 @@ from recipe.serializers import (
 RECIPES_URL = reverse('recipe:recipe-list')
 
 
-"""Helper that creates and returns a recipe detail URL."""
 def detail_url(recipe_id):
+    """Helper that creates and returns a recipe detail URL."""
     """Create and return recipe detail URL"""
     return reverse('recipe:recipe-detail', args=[recipe_id])
 
 
-"""Helper function to create recipe"""
 def create_recipe(user, **params):
+    """Helper function to create recipe"""
     """Create and return a sample recipe"""
     defaults = {
         'title': 'Sample recipe title',
