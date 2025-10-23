@@ -19,10 +19,12 @@ from recipe.serializers import (
 
 RECIPES_URL = reverse('recipe:recipe-list')
 
+
 """Helper that creates and returns a recipe detail URL."""
 def detail_url(recipe_id):
     """Create and return recipe detail URL"""
     return reverse('recipe:recipe-detail', args=[recipe_id])
+
 
 """Helper function to create recipe"""
 def create_recipe(user, **params):
@@ -39,6 +41,7 @@ def create_recipe(user, **params):
 
     recipe = Recipe.objects.create(user=user, **defaults)
     return recipe
+
 
 class PublicRecipeApiTests(TestCase):
     """Test unauthenticated API requests"""
