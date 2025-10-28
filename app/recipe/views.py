@@ -14,7 +14,6 @@ from recipe.serializers import (
 )
 
 
-
 class RecipeViewSet(viewsets.ModelViewSet):
     """View for manage recipe APIs."""
     serializer_class = RecipeDetailSerializer
