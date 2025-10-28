@@ -14,6 +14,7 @@ from recipe.serializers import (
 )
 
 
+
 class RecipeViewSet(viewsets.ModelViewSet):
     """View for manage recipe APIs."""
     serializer_class = RecipeDetailSerializer
@@ -38,13 +39,13 @@ class RecipeViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 
-class TagViewSet(mixins.DestroyModelMixin,
-                mixins.UpdateModelMixin,
-                mixins.ListModelMixin,
-                viewsets.GenericViewSet):
-    """Manage tags in the database"""
-    serializer_class = TagSerializer
-    queryset = Tag.objects.all()
+class BaseRecipeAttributeViewSet(
+    mixins.ListModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    viewsets.GenericViewSet
+):
+    """Refactor TagView and Ingredient with a Base class"""
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -53,16 +54,25 @@ class TagViewSet(mixins.DestroyModelMixin,
         return self.queryset.filter(user=self.request.user).order_by('-name')
 
 
-class IngredientViewSet(mixins.ListModelMixin,
-                        mixins.UpdateModelMixin,
-                        mixins.DestroyModelMixin,
-                        viewsets.GenericViewSet):
+class TagViewSet(BaseRecipeAttributeViewSet):
+    """Manage tags in the database"""
+    serializer_class = TagSerializer
+    queryset = Tag.objects.all()
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+    # def get_queryset(self):
+    #     """Filter queryset to authenticated user."""
+    #     return self.queryset.filter(user=self.request.user).order_by('-name')
+
+
+class IngredientViewSet(BaseRecipeAttributeViewSet):
     """Manage ingredients in the database"""
     serializer_class = IngredientSerializer
     queryset = Ingredient.objects.all()
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        """overwrite ingredient base query to be sorted"""
-        return self.queryset.filter(user=self.request.user).order_by('-name')
+    # def get_queryset(self):
+    #     """overwrite ingredient base query to be sorted"""
+    #     return self.queryset.filter(user=self.request.user).order_by('-name')

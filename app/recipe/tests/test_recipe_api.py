@@ -21,6 +21,7 @@ from recipe.serializers import (
     RecipeDetailSerializer
 )
 
+
 RECIPES_URL = reverse('recipe:recipe-list')
 
 
@@ -125,7 +126,6 @@ class PrivateRecipeApiTests(TestCase):
         for key, value in payload.items():
             self.assertEqual(getattr(recipe, key), value)
         self.assertEqual(recipe.user, self.user)
-
 
     def test_partial_update(self):
         """Test partial update of a recipe."""

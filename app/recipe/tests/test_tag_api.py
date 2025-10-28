@@ -20,6 +20,7 @@ def create_user(**params):
 def detail_url(tag_id):
     return reverse('recipe:tag-detail', args=[tag_id])
 
+
 class PublicTagsApiTests(TestCase):
     """Test unauthenticated API requests."""
 
