@@ -39,6 +39,7 @@ def image_upload_url(image_id):
     """Create and recurn an image upload URL."""
     return reverse('recipe:recipe-upload-image', args=[image_id])
 
+
 def create_recipe(user, **params):
     """Helper function to create recipe"""
     """Create and return a sample recipe"""
@@ -371,7 +372,10 @@ class ImageUploadTests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = create_user(email='user@example.com', password='password123')
+        self.user = create_user(
+            email='user@example.com',
+            password='password123'
+        )
         self.client.force_authenticate(self.user)
         self.recipe = create_recipe(user=self.user)
 
